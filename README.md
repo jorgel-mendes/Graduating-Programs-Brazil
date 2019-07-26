@@ -58,7 +58,7 @@ if(!require(ggrepel)){
   library(ggrepel)
 }
 ```
-We load the data by lines using **pdf_text** and **read_lines**, select only the data of pages 29-31 (checking the file_pdf variable and selecting specific lines **1098:1190**) and eliminate some lines with **grep** function using header words like "CoordenaÃ§Ã£o" and "Diretoria", meaning that the line has not useful information about the programs.
+We load the data by lines using **pdf_text** and **read_lines**, select only the data of pages 29-31 (checking the file_pdf variable and selecting specific lines **1098:1190**) and eliminate some lines with **grep** function using header words like "Coordenação" and "Diretoria", meaning that the line has not useful information about the programs.
 ```R
 file_pdf <- pdf_text("pdf/Evaluation report - Computer science.pdf") %>% read_lines()
 file_pdf <- file_pdf[1098:1190]
@@ -110,11 +110,11 @@ write.xlsx(data_pdf, file = "csv/universities_before.xlsx", col.names = TRUE, ro
 NOTE: To verify if all Computer Graduating Programs were included, we checked the [Sucupira Website](https://sucupira.capes.gov.br/sucupira/public/consultas/coleta/programa/quantitativos/quantitativoIes.jsf?areaAvaliacao=2&areaConhecimento=10300007). There we verified that 11 Programs were missing, so we manually inserted them and also included the foundation year, latitude/longitude and city id. The city id was got from [here](https://github.com/kelvins/Municipios-Brasileiros/tree/master/csv), where we got the Brazilian states and cities information. The shapefile that we will use was got from [here](http://www.uel.br/laboratorios/lapege/pages/base-de-dados-shp-do-brasil.php). You can get from [here](http://forest-gis.com/download-de-shapefiles/) too.
 We also included the research topics of each one of the programs. To do that we went to each website of each program and registered each research topic. 
 The structure of all extracted and collected data is divided in the following files:
-- universidades.xlsx: information by university (id, university name, university code, course, program level, concept, latitude, longitude, city id and foundation year)
-- municipios.xlsx: all Brazilian cities, with state id to identify the state. 
-- state.xlsx: all Brazilian states, with state id to be used with municipios.xlsx.
-- temas_pesquisa.xlsx: all research topics with an id to be used with the universidade_pesquisa.xlsx.
-- universidade_pesquisa.xlsx: the joining between universities and their research topics, with an extra column called **id_mestrado_doutorado** to identify the level of each research topic: 0 to professional master degree, 1 to academic master degree, 2 to doctoral/PHd degree and 3 to both master and doctoral degree.
+- universities_after.xlsx: information by university (id, university name, university code, course, program level, concept, latitude, longitude, city id and foundation year)
+- brazilian_cities.xlsx: all Brazilian cities, with state id to identify the state. 
+- brazilian_states.xlsx: all Brazilian states, with state id to be used with municipios.xlsx.
+- research_names.xlsx: all research topics with an id to be used with the universidade_pesquisa.xlsx.
+- university_research.xlsx: the joining between universities and their research topics, with an extra column called **id_mestrado_doutorado** to identify the level of each research topic: 0 to professional master degree, 1 to academic master degree, 2 to doctoral/PHd degree and 3 to both master and doctoral degree.
 
 # Second Part
 Now we have all data needed to perform our analysis. First we load the needed data and check how they are organized.
