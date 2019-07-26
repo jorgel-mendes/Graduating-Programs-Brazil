@@ -6,7 +6,7 @@ The purpose is to realize an exploratory analysis of available data about the Co
 # First Part
 
 We will be based on this [document](https://capes.gov.br/images/stories/download/avaliacao/relatorios-finais-quadrienal-2017/20122017-CIENCIA-DA-COMPUTACAO-quadrienal.pdf) made by CAPES, the Brazilian organization responsible for Higher Education Programs evaluation.
-Our attempt is to extract the needed information from this pdf file to perform our analysis. The information that we need are in pages 29-31.
+Our attempt is to extract the needed information from this pdf file to perform our analysis. The information that we need is in pages 29-31.
 The first thing to do is to load the needed packages.
 ```R
 if (!require(pdftools)) {
@@ -58,11 +58,11 @@ if(!require(ggrepel)){
   library(ggrepel)
 }
 ```
-We load the data by lines using **pdf_text** and **read_lines**, select only the data of pages 29-31 (checking the file_pdf variable and selecting specific lines **1098:1190**) and eliminate some lines with **grep** function using header words like "Coordenação" and "Diretoria", meaning that the line has not useful information about the programs.
+We load the data by lines using **pdf_text** and **read_lines**, select only the data of pages 29-31 (checking the file_pdf variable and selecting specific lines **1098:1190**) and eliminate some lines with **grep** function using header words like "CoordenaÃ§Ã£o" and "Diretoria", meaning that the line has not useful information about the programs.
 ```R
 file_pdf <- pdf_text("pdf/Evaluation report - Computer science.pdf") %>% read_lines()
 file_pdf <- file_pdf[1098:1190]
-file_pdf <- file_pdf[-(grep("Coordena��o", file_pdf))]
+file_pdf <- file_pdf[-(grep("Coordenação", file_pdf))]
 file_pdf <- file_pdf[-(grep("Diretoria", file_pdf))]
 ```
 There were some lines that were not properly read (because of information format), so it was easier to remove them. Of course, after we need to include them manually. 
@@ -169,7 +169,7 @@ To generate the map below, we will use **ggplot** and some other functions. Let'
 7.  scale_size_continuous(name = "Conceito", breaks = mybreaks) +
 8.  coord_map() + 
 9.  guides( colour = guide_legend(), alpha = FALSE) +
-10. ggtitle("Programas de P�s-Gradua��o em Computa��o") +
+10. ggtitle("Programas de Pós-Graduação em Computação") +
 11. labs(x = "Longitude", y = "Latitude") +
 12. theme(
 13.    legend.position = c(0.9, 0.15),
@@ -210,11 +210,11 @@ p <- ggplot(data = all_data, aes(group = Ano)) +
     geom_path( data = shape_brazil, aes( x = long, y = lat, group = group), color = "black", size = 0.05) +
     geom_point( data = all_data, aes(x = long_university, y = lat_university, size = 4, color = as.factor(Nota), alpha = 0.05, group = Ano, shape = as.factor(id_mestrado_doutorado))) +
     scale_color_manual(name = "Conceito", breaks = mybreaks, values = c("red","orange","yellow","dark green","light green")) +
-    scale_shape_manual(name = "N�vel", values = c(15, 17, 18, 19), labels = c("Mestrado Profissional","Mestrado","Doutorado","Mestrado + Doutorado")) +
+    scale_shape_manual(name = "Nível", values = c(15, 17, 18, 19), labels = c("Mestrado Profissional","Mestrado","Doutorado","Mestrado + Doutorado")) +
     coord_map() +
     shadow_mark(past = TRUE) +
     guides( colour = guide_legend(override.aes = list(size = 8)), shape = guide_legend(override.aes = list(size=8)), alpha = FALSE, size = FALSE) +
-    ggtitle("Programas de P�s-Gradua��o em Computa��o em {round(frame_time,0)}") +
+    ggtitle("Programas de Pós-Graduação em Computação em {round(frame_time,0)}") +
     labs(x = "Longitude", y = "Latitude") +
     transition_time(Ano) +
     theme(
@@ -250,7 +250,7 @@ ggplot() +
   scale_size_manual(name = "Conceito", values = c(3,4,5,6,7)) +
   coord_map() + 
   guides( alpha = FALSE) +
-  ggtitle("Programas de P�s-Gradua��o em Intelig�ncia Artificial") +
+  ggtitle("Programas de Pós-Graduação em Inteligência Artificial") +
   labs(x = "Longitude", y = "Latitude") +
   theme(
     legend.position = c(0.9, 0.15),
@@ -269,12 +269,12 @@ Programs with Computer Theory.
 ggplot() + 
   geom_polygon( data = shape_brazil, aes(x = long, y = lat, group = group), fill = "grey", alpha = 0.3) +
   geom_path( data = shape_brazil, aes( x = long, y = lat, group = group), color = "black", size = 0.1) +
-  geom_point( data = all_data[all_data$nome=="Teoria da Computa��o",], aes(x = long_university, y = lat_university, size = Nota, color = Nota, alpha = 0.3)) +
+  geom_point( data = all_data[all_data$nome=="Teoria da Computação",], aes(x = long_university, y = lat_university, size = Nota, color = Nota, alpha = 0.3)) +
   scale_color_viridis(name = "Conceito", breaks = mybreaks) +
   scale_size_continuous(name = "Conceito", breaks = mybreaks) +
   coord_map() + 
   guides( colour = guide_legend(), alpha = FALSE) +
-  ggtitle("Programas de P�s-Gradua��o em Teoria da Computa��o") +
+  ggtitle("Programas de Pós-Graduação em Teoria da Computação") +
   labs(x = "Longitude", y = "Latitude") +
   theme(
     legend.position = c(0.9, 0.15),
@@ -300,7 +300,7 @@ ggplot() +
   scale_size_continuous(name = "Conceito", breaks = mybreaks) +
   coord_map() + 
   guides( colour = guide_legend(), size = guide_legend(), alpha = FALSE, label = FALSE, text = FALSE) +
-  ggtitle("Programas de P�s-Gradua��o com Mestrado e Doutorado") +
+  ggtitle("Programas de Pós-Graduação com Mestrado e Doutorado") +
   labs(x = "Longitude", y = "Latitude") +
   theme(
     legend.position = c(0.9, 0.15),
