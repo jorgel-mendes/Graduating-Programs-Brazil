@@ -251,7 +251,7 @@ animate(p, nframes = 52, fps = 1, width = 1800, height = 900, renderer = gifski_
 
 ![png](images/figure2.gif)
 
-If you want to generate video instead of gifs, you can use the **animate** function below with **ffmpeg_renderer**. Note: you need first to download and install the [ffmpeg] (https://ffmpeg.org/download.html) in your system.
+If you want to generate video instead of gifs, you can use the **animate** function below with **ffmpeg_renderer**. Note: you need first to download and install the [ffmpeg](https://ffmpeg.org/download.html) in your system.
 
 ```R
  animate(p, nframes=56, fps = 2, width = 1800, height = 900, renderer = ffmpeg_renderer()) + ease_aes('cubic-in-out')
