@@ -31,16 +31,16 @@ if (!require(ggplot2)) {
   require(ggplot2)
 }
 if(!require(RColorBrewer)){
-    install.packages("RColorBrewer")
-    library(RColorBrewer)
+    install.packages("RColorBrewer", repos = "http://cran.us.r-project.org")
+    require(RColorBrewer)
 }
 if(!require(viridis)){
-  install.packages("viridis")
-  library(viridis)
+  install.packages("viridis", repos = "http://cran.us.r-project.org")
+  require(viridis)
 }
 if(!require(gganimate)){
-  install.packages("gganimate")
-  library(gganimate)
+  install.packages("gganimate", repos = "http://cran.us.r-project.org")
+  require(gganimate)
 }
 
 brazilian_states <- read.csv("csv/brazilian_states.csv",sep=",", stringsAsFactors=FALSE, encoding = "UTF-8")
