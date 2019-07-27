@@ -43,7 +43,7 @@ if(!require(gganimate)){
   require(gganimate)
 }
 
-file_pdf <- pdf_text("pdf/Evaluation report - Computer science.pdf") %>% read_lines()
+file_pdf <- pdf_text("../pdf/Evaluation report - Computer science.pdf") %>% read_lines()
 file_pdf <- file_pdf[1098:1190]
 
 file_pdf <- file_pdf[-(grep("Coordenação", file_pdf))]
@@ -81,4 +81,4 @@ for(i in seq(from = 2, to = length(list_pdf), by = 5)){
     a <- a + 1
 }
 
-write.xlsx(data_pdf, file = "pdf/universities_before.xlsx", col.names = TRUE, row.names = TRUE, append = FALSE)
+write.xlsx(data_pdf, file = "../pdf/universities_before.xlsx", col.names = TRUE, row.names = TRUE, append = FALSE)
