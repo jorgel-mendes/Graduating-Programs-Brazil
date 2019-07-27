@@ -42,20 +42,20 @@ if (!require(ggplot2)) {
   require(ggplot2)
 }
 if(!require(RColorBrewer)){
-    install.packages("RColorBrewer")
-    library(RColorBrewer)
+    install.packages("RColorBrewer", repos = "http://cran.us.r-project.org")
+    require(RColorBrewer)
 }
 if(!require(viridis)){
-  install.packages("viridis")
-  library(viridis)
+  install.packages("viridis", repos = "http://cran.us.r-project.org")
+  require(viridis)
 }
 if(!require(gganimate)){
-  install.packages("gganimate")
-  library(gganimate)
+  install.packages("gganimate", repos = "http://cran.us.r-project.org")
+  require(gganimate)
 }
 if(!require(ggrepel)){
-  install.packages("ggrepel")
-  library(ggrepel)
+  install.packages("ggrepel", repos = "http://cran.us.r-project.org")
+  require(ggrepel)
 }
 ```
 We load the data by lines using **pdf_text** and **read_lines**, select only the data of pages 29-31 (checking the file_pdf variable and selecting specific lines **1098:1190**) and eliminate some lines with **grep** function using header words like "Coordenação" and "Diretoria", meaning that the line has not useful information about the programs.
