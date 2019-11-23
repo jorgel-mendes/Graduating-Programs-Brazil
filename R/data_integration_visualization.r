@@ -102,7 +102,7 @@ theme <- theme(axis.text = element_text(size = 16),
 labs <- labs(x = "Longitude", y = "Latitude", caption = "Data source: Computer Science Graduating Programs - Sucupira Website") 
 
 ggplot() + 
-  geom_polygon( data = shape_brazil, aes(x = long, y = lat, group = group), fill = "grey", size = 0.1, color = "black") +
+  geom_polygon( data = shape_brazil, aes(x = long, y = lat, group = group), fill = "white", size = 0.1, color = "black") +
   geom_point( data = all_data[!duplicated(all_data$id),], aes(x = longitude, y = latitude, size = grade, color = grade, alpha = I(2/(grade)))) +
   scale_color_viridis(name = "Conceito", breaks = mybreaks) +
   scale_size_continuous(name = "Conceito", breaks = mybreaks) +
@@ -125,17 +125,17 @@ p <- ggplot(data = all_data, aes(group = year)) +
      transition_time(year) +
      theme + labs
 
-animate(p, nframes = 52, fps = 2, width = 1800, height = 900, renderer = gifski_renderer("images/gganim.gif", loop = FALSE)) + ease_aes('cubic-in-out')
+animate(p, nframes = 52, fps = 2, width = 980, height = 980, renderer = gifski_renderer("images/gganim.gif", loop = FALSE)) + ease_aes('cubic-in-out')
 
 animate(p, width = 1800, height = 1200, renderer = ffmpeg_renderer())
 anim_save("nations.mp4")
 
-animate(p, width = 1800, nframes = 52, fps = 2, height = 1200, renderer = av_renderer('animation.mp4'))
+animate(p, width = 980, nframes = 52, fps = 2, height = 980, renderer = av_renderer('animation.mp4'))
 
 all_data_2 <- subset(all_data, all_data$research_name=="Inteligencia Artificial")
 
 ggplot() + 
-geom_polygon(data = shape_brazil, aes(x = long, y = lat, group = group), fill = "gray", size = 0.1, color = "black") +
+geom_polygon(data = shape_brazil, aes(x = long, y = lat, group = group), fill = "white", size = 0.1, color = "black") +
 geom_point(data = all_data_2[!duplicated(all_data_2$id),], aes(x = longitude, y = latitude, size = as.factor(grade), color = as.factor(grade), alpha = I(2/grade))) +
 scale_colour_manual(name = "Conceito", values = c("red","blue","dark green","green","yellow")) +
 scale_size_manual(name = "Conceito", values = mybreaks) +
@@ -149,7 +149,7 @@ labs + theme
 all_data_2 <- subset(all_data, all_data$concentration_area == "Teoria da Computação")
 
 ggplot() + 
-geom_polygon(data = shape_brazil, aes(x = long, y = lat, group = group), fill = "gray", size = 0.15, color = "black") +
+geom_polygon(data = shape_brazil, aes(x = long, y = lat, group = group), fill = "white", size = 0.15, color = "black") +
 geom_point(data = all_data_2[!duplicated(all_data_2$id),], aes(x = longitude, y = latitude, size = grade, color = grade)) +
 geom_text_repel(data = all_data_2[!duplicated(all_data_2$code),], aes(x = longitude, y = latitude, label = code, size = 6), hjust = 0, nudge_x = -34 - subset(all_data_2, !duplicated(all_data_2$code))$longitude, direction = "y", show.legend = FALSE) +
 scale_color_viridis(name = "Conceito", breaks = mybreaks) +
